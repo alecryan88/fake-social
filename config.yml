@@ -1,4 +1,4 @@
 # Controls how many events are sent to the Kinesis Stream
 metric:
-  signups: 100000
-  sessions: 100000
+  signups: 1000
+  sessions: 20000
