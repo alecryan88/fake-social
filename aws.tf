@@ -1,8 +1,8 @@
 resource "aws_dynamodb_table" "signups" {
   name           = "signups"
   billing_mode   = "PROVISIONED"
-  read_capacity  = 3
-  write_capacity = 3
+  read_capacity  = 10
+  write_capacity = 10
   hash_key       = "user_id"
 
   attribute {

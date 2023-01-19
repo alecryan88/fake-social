@@ -21,35 +21,65 @@ dynamodb = boto3.resource('dynamodb')
 signup_table = dynamodb.Table('signups')
 session_table = dynamodb.Table('sessions')
 
+def dump_table(table_name):
+    
+    table = dynamodb.Table('signups')
+    results = []
+    last_evaluated_key = None
+    while True:
+        if last_evaluated_key:
+            response = table.scan(
+                ExclusiveStartKey=last_evaluated_key,
+                FilterExpression=Attr('session_eligible').eq(True)
+            )
+        else: 
+            response = table.scan()
+        last_evaluated_key = response.get('LastEvaluatedKey')
+        
+        results.extend(response['Items'])
+        
+        if not last_evaluated_key:
+            break
+    return results
+
+
 while True:
     duration = 0
 
     #Scan table every ~60 sec
-    response = signup_table.scan()
-
-    user_list = [i['user_id'] for i in response["Items"]]
+    user_list = dump_table('signups')
 
     while duration <= 60:
-        
-        
-        
+    
         daily_sessions = loader_yaml['metric']['sessions']
         
         cadence = 86400 / daily_sessions 
         
         time.sleep(cadence)
         
-        user_id = random.choice(user_list)
+        user_data = random.choice(user_list)
         
         session = {
             'session_id': str(fake.random_number(fix_len=True, digits=11)),
             'session_start_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            'user_id': user_id
+            'user_id': user_data['user_id']
 
         }
+
         duration += cadence
 
+        #Remove user that is currently in a session
+        user_list.remove(user_data)
+
         session_table.put_item(Item=session)
+
+        signup_table.update_item(
+             Key={'user_id': user_data['user_id']},
+             UpdateExpression='SET session_eligible = :s',
+             ExpressionAttributeValues={
+                ':s': False
+             }
+        )
 
         print(duration)
 

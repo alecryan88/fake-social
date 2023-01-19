@@ -46,7 +46,8 @@ def create_account():
         'longitude' : str(fake.longitude()),
         'email' : fake.email(),
         'date_of_birth': fake.date_of_birth().strftime('%Y-%m-%d'),
-        'signed_up_at': int(time.time())
+        'signed_up_at': int(time.time()),
+        'session_eligible': True
     }
 
     return account 
