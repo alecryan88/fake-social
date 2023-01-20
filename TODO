@@ -1,0 +1,2 @@
+1. Send Session event to lamda for some duration
+    ---- Will need to set the sessin session_eligible flag back to true

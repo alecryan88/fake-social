@@ -33,7 +33,9 @@ def dump_table(table_name):
                 FilterExpression=Attr('session_eligible').eq(True)
             )
         else: 
-            response = table.scan()
+            response = table.scan(
+                FilterExpression=Attr('session_eligible').eq(True)
+            )
         last_evaluated_key = response.get('LastEvaluatedKey')
         
         results.extend(response['Items'])
@@ -72,7 +74,6 @@ while True:
         user_list.remove(user_data)
 
         session_table.put_item(Item=session)
-
         signup_table.update_item(
              Key={'user_id': user_data['user_id']},
              UpdateExpression='SET session_eligible = :s',

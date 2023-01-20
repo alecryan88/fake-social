@@ -15,7 +15,7 @@ session_table = dynamodb.Table('sessions')
 
 
 def dump_table(table_name):
-
+    
     table = dynamodb.Table('signups')
     results = []
     last_evaluated_key = None
