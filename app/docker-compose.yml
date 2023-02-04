@@ -1,12 +1,14 @@
 version: "3.9"
 services:
 
-  sessions:
+  session:
     build: .
+    image: app/session:latest
     command: python3 events/session.py
     env_file: .env
 
-  signups:
+  signup:
     build: .
+    image: app/signup:latest
     command: python3 events/signup.py
     env_file: .env

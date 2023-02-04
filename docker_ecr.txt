@@ -1,0 +1,19 @@
+1. Create Repository
+    aws ecr create-repository --repository-name app/session
+    aws ecr create-repository --repository-name app/signup
+
+2. export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+
+3. export AWS_REGION=us-east-1
+
+4. export REGISTRY_URL=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+
+5. docker compose build 
+
+6. Tag Images: 
+    docker tag app/session:latest 647410971427.dkr.ecr.us-east-1.amazonaws.com/app/session:latest
+    docker tag app/signup:latest 647410971427.dkr.ecr.us-east-1.amazonaws.com/app/signup:latest
+
+7. Push Images:
+    docker push 647410971427.dkr.ecr.us-east-1.amazonaws.com/app/signup:latest
+    docker push 647410971427.dkr.ecr.us-east-1.amazonaws.com/app/session:latest

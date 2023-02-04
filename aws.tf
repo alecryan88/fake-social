@@ -65,3 +65,21 @@ resource "aws_security_group" "allow_all_ob" {
     Name = "allow_all_ob"
   }
 }
+
+resource "aws_ecr_repository" "signup_repo" {
+  name                 = "app/signup"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+}
+
+resource "aws_ecr_repository" "session_repo" {
+  name                 = "app/session"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+}
