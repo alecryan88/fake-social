@@ -34,6 +34,3 @@ while True:
 
     #Insert signup into table
     db.insert_into_table('signups', signup_table)
-
-
-    

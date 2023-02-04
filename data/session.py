@@ -30,11 +30,12 @@ while True:
     eligible_users = db.dump_table(signup_table)
 
     while duration <= 60:
-    
+        
+        #Calculates daily cadence for creating fake events
         cadence =  86400 / config_yml['metrics']['sessions']
-
         time.sleep(cadence)
         
+        #Extracts signup user_id from list of eligible users
         user_data = random.choice(eligible_users)
         user_id = user_data['user_id']
         
@@ -47,8 +48,10 @@ while True:
         #Remove user that is currently in a session
         eligible_users.remove(user_data)
 
+        #Inserts session start into dynamo table
         db.insert_into_table(sessions_table, session_start)
 
+        #Updates session eligibility in signup table
         db.update_session_eligible(user_id, signup_table)
 
         print(duration)
