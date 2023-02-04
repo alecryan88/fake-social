@@ -1,7 +1,7 @@
 import faker
 import yaml
 import time
-import users
+import user_events
 from aws.dynamodb import dynamo_db
 
 #Load config as yaml -> dict
@@ -12,7 +12,7 @@ config_yml = yaml.safe_load(config)
 fake = faker.Faker(use_weighting=True, locale='en')
 
 #Create a user class
-user = users.User(fake, config_yml)
+user = user_events.User(fake, config_yml)
 
 #Create a signup evnent
 signup = user.create_account()

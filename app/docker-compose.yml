@@ -4,11 +4,11 @@ services:
   session:
     build: .
     image: app/session:latest
-    command: python3 events/session.py
+    command: python3 events/create_sessions.py
     env_file: .env
 
   signup:
     build: .
     image: app/signup:latest
-    command: python3 events/signup.py
+    command: python3 events/create_signups.py
     env_file: .env
