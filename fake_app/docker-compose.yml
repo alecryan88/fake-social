@@ -3,10 +3,10 @@ services:
 
   sessions:
     build: .
-    command: python3 session.py
+    command: python3 events/session.py
     env_file: .env
 
   signups:
     build: .
-    command: python3 signup.py
+    command: python3 events/signup.py
     env_file: .env
