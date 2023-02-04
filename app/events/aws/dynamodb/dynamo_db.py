@@ -8,16 +8,19 @@ class DynamoDB:
 
 
     def get_table(self, table_name):
+        '''Returns dynamodb table object'''
         table = self.dynamodb.Table(table_name)
         return table
     
     
-    def insert_into_table(self, table, obj):
-        table.put_item(Item=obj)
+    def insert_into_table(self, table, item):
+        '''Inserts item in dynamodb table object'''
+        table.put_item(Item=item)
         print("Object loaded to dynamo table.")
 
 
     def dump_table(self, table):
+        '''Dumps entire table into a list'''
         results = []
         last_evaluated_key = None
         while True:
@@ -39,7 +42,9 @@ class DynamoDB:
 
         return results
 
+
     def update_session_eligible(self, user_id, table):
+        '''Updates user session eligiblilty in dynamo signup table.'''
 
         table.update_item(
              Key={'user_id': user_id},
