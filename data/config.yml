@@ -1,0 +1,15 @@
+# Controls how many events are sent to the Kinesis Stream
+metrics:
+  signups: 30000
+  sessions: 30000
+
+#Controls possible values for each dimension 
+dimensions:
+  genders:
+    - 'm'     
+    - 'f' 
+    - 'nb'
+
+  platforms:
+   - 'android'
+   - 'ios'

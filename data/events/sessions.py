@@ -7,15 +7,6 @@ from dotenv import load_dotenv
 import random
 import time
 
-load_dotenv()
-
-loader_config = open('config.yml', 'r')
-loader_yaml = yaml.safe_load(loader_config)
-
-
-fake = faker.Faker(
-    use_weighting=True,
-    locale='en')
 
 dynamodb = boto3.resource('dynamodb')
 signup_table = dynamodb.Table('signups')
@@ -62,7 +53,7 @@ while True:
         user_data = random.choice(user_list)
         
         session = {
-            'session_id': str(fake.random_number(fix_len=True, digits=11)),
+            'session_id': fake.uuid4(),
             'session_start_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
             'user_id': user_data['user_id']
 
@@ -85,5 +76,3 @@ while True:
         print(duration)
 
         print(session)
-
-
