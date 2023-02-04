@@ -35,10 +35,11 @@ while True:
         cadence =  86400 / config_yml['metrics']['sessions']
         time.sleep(cadence)
         
-        #Extracts signup user_id from list of eligible users
+        #Extracts signup user_id from list of eligible users if there are any
+        
         user_data = random.choice(eligible_users)
         user_id = user_data['user_id']
-        
+
         #Create a session_start evnent
         session_start = user.create_session_start(user_id)
 

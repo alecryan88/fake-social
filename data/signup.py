@@ -33,4 +33,4 @@ while True:
     signup = user.create_account()
 
     #Insert signup into table
-    db.insert_into_table('signups', signup_table)
+    db.insert_into_table(signup_table, signup)

@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+
+  sessions:
+    build: .
+    command: python3 session.py
+    env_file: .env
+
+  signups:
+    build: .
+    command: python3 signup.py
+    env_file: .env
