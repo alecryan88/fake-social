@@ -48,7 +48,7 @@ class User:
         self.get_platform()
             
         account = {
-            'user_id' : str(self.fake.random_number(fix_len=True, digits=9)),
+            'user_id': self.fake.uuid4(),
             'gender': self.gender,
             'name' : self.name,
             'platform_token' : self.platform_token,
