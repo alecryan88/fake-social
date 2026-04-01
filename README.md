@@ -1,4 +1,16 @@
-# fake-social
+# Project Title
 
-## Overview
-This is a near-real time data ingestion pipeline that ingests mock social app data. The data is generated using the faker library.
+# Description
+An overview of what the project does.
+
+# Installation Instructions
+How to install and set up the project.
+
+# Usage
+Usage examples.
+
+# Contributing Guidelines
+How to contribute to the project.
+
+# License Information
+Details on the license.
